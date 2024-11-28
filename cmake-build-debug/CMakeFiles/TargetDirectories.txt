@@ -1,3 +1,3 @@
-C:/Users/enesb/CLionProjects/AssemblerForProject/cmake-build-debug/CMakeFiles/AssemblerForProject.dir
-C:/Users/enesb/CLionProjects/AssemblerForProject/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/enesb/CLionProjects/AssemblerForProject/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/enesb/OneDrive/Belgeler/GitHub/AssemblerForProject/cmake-build-debug/CMakeFiles/AssemblerForProject.dir
+C:/Users/enesb/OneDrive/Belgeler/GitHub/AssemblerForProject/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/enesb/OneDrive/Belgeler/GitHub/AssemblerForProject/cmake-build-debug/CMakeFiles/rebuild_cache.dir

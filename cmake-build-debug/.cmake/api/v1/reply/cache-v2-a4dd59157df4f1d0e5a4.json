@@ -11,7 +11,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/enesb/CLionProjects/AssemblerForProject/cmake-build-debug"
+			"value" : "C:/Users/enesb/OneDrive/Belgeler/GitHub/AssemblerForProject/cmake-build-debug"
 		},
 		{
 			"name" : "AssemblerForProject_IS_TOP_LEVEL",
@@ -35,7 +35,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/enesb/CLionProjects/AssemblerForProject"
+			"value" : "C:/Users/enesb/OneDrive/Belgeler/GitHub/AssemblerForProject"
 		},
 		{
 			"name" : "CMAKE_ADDR2LINE",
@@ -91,7 +91,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/enesb/CLionProjects/AssemblerForProject/cmake-build-debug"
+			"value" : "c:/Users/enesb/OneDrive/Belgeler/GitHub/AssemblerForProject/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -467,7 +467,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/enesb/CLionProjects/AssemblerForProject/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/enesb/OneDrive/Belgeler/GitHub/AssemblerForProject/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -539,7 +539,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/enesb/CLionProjects/AssemblerForProject"
+			"value" : "C:/Users/enesb/OneDrive/Belgeler/GitHub/AssemblerForProject"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",

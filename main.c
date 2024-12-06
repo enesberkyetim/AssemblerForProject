@@ -155,48 +155,174 @@ int main(void) {
         }
         else if ((strcmp(opcode_str, "ADDI") && strcmp(opcode_str, "NANDI") && strcmp(opcode_str, "ORI") && strcmp(opcode_str, "SUBI") && strcmp(opcode_str, "SLLI")) == 0) { // Data Selçuk bu kısmı dolduracak
 
-            if (strcmp(opcode_str, "ADDI") == 0) {
+             if (strcmp(opcode_str, "ADDI") == 0) {
                 instruction_bin[0] = 0;
                 instruction_bin[1] = 0;
                 instruction_bin[2] = 0;
                 instruction_bin[3] = 0;
-
-                instruction_bin[12] = 1;
             }
             else if (strcmp(opcode_str, "NANDI") == 0) {
                 instruction_bin[0] = 0;
                 instruction_bin[1] = 0;
                 instruction_bin[2] = 0;
                 instruction_bin[3] = 1;
-
-                instruction_bin[12] = 1;
             }
             else if (strcmp(opcode_str, "ORI") == 0) {
                 instruction_bin[0] = 0;
                 instruction_bin[1] = 0;
                 instruction_bin[2] = 1;
                 instruction_bin[3] = 0;
-
-                instruction_bin[12] = 1;
             }
             else if (strcmp(opcode_str, "SUBI") == 0) {
                 instruction_bin[0] = 0;
                 instruction_bin[1] = 0;
                 instruction_bin[2] = 1;
                 instruction_bin[3] = 1;
-
-                instruction_bin[12] = 1;
             }
             else if (strcmp(opcode_str, "SLLI") == 0) {
                 instruction_bin[0] = 0;
                 instruction_bin[1] = 1;
                 instruction_bin[2] = 0;
                 instruction_bin[3] = 0;
-
-                instruction_bin[12] = 1;
             }
 
-            printf("I\n");
+            instruction_bin[12] = 1;
+            char src[2] = {'\0', '\0'};
+            char dest[2] = {'\0', '\0'};
+            char imm[4] = {'\0', '\0','\0', '\0'};
+            int dest_reg = 0;
+            int src_reg = 0;
+            i++;
+            int j = 0;
+
+            while (line[i] != ',') {
+                dest[j] = line[i];
+                i++;
+                j++;
+            }
+
+            j = 0;
+
+            if (dest[1] == '\0') {
+                dest_reg = dest[0] - 48;
+            }
+            else {
+                dest_reg = 10 * (dest[0] - 48) + dest[1] - 48;
+            }
+
+            i+=2;
+
+            while (line[i] != ',') {
+                src[j] = line[i];
+                i++;
+                j++;
+            }
+
+            j = 0;
+
+            if (src[1] == '\0') {
+                src_reg = src[0] - 48;
+            }
+            else {
+                src_reg = 10 * (src[0] - 48) + src[1] - 48;
+            }
+
+            i++;
+            j= 0;
+
+            while (line[i] != '\n' && line[i] != EOF && line[i] != '\0') {
+                imm[j] = line[i];
+                i++;
+                j++;
+            }
+
+            if (imm[0] != '-') {
+                j--;
+            } else {
+                j -= 2;
+            }
+
+
+            int count = 0;
+            int k = 0;
+            int integer_imm_p = 0;
+            int integer_imm_n = 0;
+            int integer_imm = 0;
+
+            while (imm[k] != '\0') {
+                if (imm[0] != '-') {
+                    integer_imm_p += (imm[k] - 48) * pow(10, j);
+                    k++;
+                    j--;
+                    integer_imm = integer_imm_p;
+                } else {
+                    integer_imm_n += ((imm[k + 1] - 48) * (int) (pow(10, j)));
+                    k++;
+                    j--;
+                    integer_imm = integer_imm_n;
+                }
+
+            }
+
+            if (integer_imm == integer_imm_p) {
+                for (i = 19; i > 12; i--) {
+                    int result = integer_imm % 2;
+                    integer_imm /= 2;
+                    instruction_bin[i] = result;
+                }
+            } else if (integer_imm == integer_imm_n) {
+                int positive_binary[7];
+                int p = 6;
+                int j = 19;
+                for (p = 6; p >= 0; p--) {
+                    int pbit = integer_imm_n % 2;
+                    integer_imm_n /= 2;
+                    positive_binary[p] = pbit;
+                }
+                for (p = 6; p >= 0; p--) {
+                    if (positive_binary[p] == 0) {
+                        positive_binary[p] = 1;
+                        continue;
+                    }
+
+                    if (positive_binary[p] == 1) {
+                        positive_binary[p] = 0;
+                        continue;
+                    }
+
+                }
+
+                p = 6;
+                while (positive_binary[p] != 0) {
+                    positive_binary[p] = 0;
+                    p--;
+                }
+                positive_binary[p] = 1;
+
+                p = 6;
+                for (j = 19; j > 12; j--) {
+                    instruction_bin[j] = positive_binary[p];
+                    p--;
+                }
+            }
+
+            for (i = 7; i > 3; i--) {
+                int result = src_reg % 2;
+                src_reg /= 2;
+                instruction_bin[i] = result;
+            }
+
+            for (i = 11; i > 7; i--) {
+                int result = dest_reg % 2;
+                dest_reg /= 2;
+                instruction_bin[i] = result;
+            }
+
+            for (i = 0; i < 20; i++) {
+                printf("%d", instruction_bin[i]);
+            }
+
+            printf("\n");
         }
         else if (strcmp(opcode_str, "LD") == 0 || strcmp(opcode_str, "ST") == 0) {
 
@@ -522,11 +648,60 @@ int main(void) {
 
         }
 
+        int cur_hex[4] = {0, 0, 0, 0};
+
+        for (i = 0; i < 20; i++) {
+
+            if (i % 4 == 3) {
+                cur_hex[i % 4] = instruction_bin[i];
+                int hex_num = 0;
+                for (int j = 3; j >= 0; j--) {
+                    hex_num += (cur_hex[j]) * pow(2, (3 - j));
+                }
+
+                if (hex_num < 10) {
+                    printf("%d", hex_num);
+                }
+                else {
+                    switch (hex_num) {
+                        case 10:
+                            printf("a");
+                        break;
+                        case 11:
+                            printf("b");
+                        break;
+                        case 12:
+                            printf("c");
+                        break;
+                        case 13:
+                            printf("d");
+                        break;
+                        case 14:
+                            printf("e");
+                        break;
+                        case 15:
+                            printf("f");
+                        break;
+                    }
+                }
+
+                cur_hex[0] = 0;
+                cur_hex[1] = 0;
+                cur_hex[2] = 0;
+                cur_hex[3] = 0;
+                hex_num = 0;
+            }
+            else {
+                cur_hex[i % 4] = instruction_bin[i];
+            }
+        }
+
+        printf("\n");
+
         for (int j = 0; j < 5; j++) {
             opcode_str[j] = '\0';
         }
-        // Buraya binary to hex dönüştürücü lazım, dönüşüm yaparken hoca proje dosyasında bir örnek atmıştı ona bakarsın data bey
-        // 0a2fe 23ed0 gibi böyle boşluk aralarda olacak şekilde basarız vs
+
     }
     return 0;
 }

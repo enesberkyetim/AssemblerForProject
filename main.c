@@ -5,6 +5,9 @@
 
 int main(void) {
     FILE *input_file = fopen("input.txt", "r+");
+    FILE *output_file = fopen("output.txt", "w+");
+
+    fprintf(output_file,"v2.0 raw\n");
 
     while (feof(input_file) == 0) {
         char line[100];
@@ -147,11 +150,11 @@ int main(void) {
                 instruction_bin[i] = result;
             }
 
-            for (i = 0; i < 20; i++) {
-                printf("%d", instruction_bin[i]);
-            }
+            //for (i = 0; i < 20; i++) {
+            //printf("%d", instruction_bin[i]);
+            //}
 
-            printf("\n");
+
         }
         else if ((strcmp(opcode_str, "ADDI") && strcmp(opcode_str, "NANDI") && strcmp(opcode_str, "ORI") && strcmp(opcode_str, "SUBI") && strcmp(opcode_str, "SLLI")) == 0) { // Data Selçuk bu kısmı dolduracak
 
@@ -318,11 +321,11 @@ int main(void) {
                 instruction_bin[i] = result;
             }
 
-            for (i = 0; i < 20; i++) {
-                printf("%d", instruction_bin[i]);
-            }
+            //for (i = 0; i < 20; i++) {
+            //printf("%d", instruction_bin[i]);
+            //}
 
-            printf("\n");
+
         }
         else if (strcmp(opcode_str, "LD") == 0 || strcmp(opcode_str, "ST") == 0) {
 
@@ -389,11 +392,11 @@ int main(void) {
                 instruction_bin[i] = result;
             }
 
-            for (i = 0; i < 20; i++) {
-                printf("%d", instruction_bin[i]);
-            }
+            //for (i = 0; i < 20; i++) {
+                //printf("%d", instruction_bin[i]);
+            //}
 
-            printf("\n");
+
 
         } else if (strcmp(opcode_str, "JUMP") == 0) {
             instruction_bin[0] = 0;
@@ -479,11 +482,11 @@ int main(void) {
 
             }
 
-            for (i = 0; i < 20; i++) {
-                printf("%d", instruction_bin[i]);
-            }
+            //for (i = 0; i < 20; i++) {
+            //printf("%d", instruction_bin[i]);
+            //}
 
-            printf("\n");
+
         }
         else if ((strcmp(opcode_str, "BEQ") == 0) || (strcmp(opcode_str, "BLT") == 0) || (strcmp(opcode_str, "BGT") == 0) || (strcmp(opcode_str, "BLE") == 0) || (strcmp(opcode_str, "BGE") == 0)) {
             if (strcmp(opcode_str, "BEQ") == 0) {
@@ -641,10 +644,10 @@ int main(void) {
             }
 
 
-            for (i = 0; i < 20; i++) {
-                printf("%d", instruction_bin[i]);
-            }
-            printf("\n");
+            //for (i = 0; i < 20; i++) {
+            //printf("%d", instruction_bin[i]);
+            //}
+
 
         }
 
@@ -660,27 +663,27 @@ int main(void) {
                 }
 
                 if (hex_num < 10) {
-                    printf("%d", hex_num);
+                    fprintf(output_file, "%d", hex_num);
                 }
                 else {
                     switch (hex_num) {
                         case 10:
-                            printf("a");
+                            fprintf(output_file,"a");
                         break;
                         case 11:
-                            printf("b");
+                            fprintf(output_file,"b");
                         break;
                         case 12:
-                            printf("c");
+                            fprintf(output_file,"c");
                         break;
                         case 13:
-                            printf("d");
+                            fprintf(output_file,"d");
                         break;
                         case 14:
-                            printf("e");
+                            fprintf(output_file,"e");
                         break;
                         case 15:
-                            printf("f");
+                            fprintf(output_file,"f");
                         break;
                     }
                 }
@@ -696,7 +699,7 @@ int main(void) {
             }
         }
 
-        printf("\n");
+        fprintf(output_file, " ");
 
         for (int j = 0; j < 5; j++) {
             opcode_str[j] = '\0';
